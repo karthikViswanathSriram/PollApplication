@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/polls")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class PollController {
 
     private final PollService pollService;
@@ -20,6 +21,8 @@ public class PollController {
 
     @PostMapping
     private Poll createPoll(@RequestBody Poll poll){
+        // since Id is auto generated, we need to set any other id if given to null to avoid error
+        poll.setId(null);
         return pollService.createPoll(poll);
     }
 
